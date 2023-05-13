@@ -28,3 +28,32 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         db_table = 'user'
+
+
+class Contact(models.Model):
+    '''contact model - for contact us form'''
+    name = models.CharField(max_length=255)
+    email = models.EmailField(max_length=50)
+    phone = models.CharField(max_length=15)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'contact'
+
+
+class Pricing(models.Model):
+    '''pricing model - for pricing page'''
+    name = models.CharField(max_length=255)
+    price = models.CharField(max_length=255)
+    description = models.TextField()  # description of the plan - separated by |
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'pricing'
