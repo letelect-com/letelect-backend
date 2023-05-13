@@ -5,7 +5,7 @@ class AccountManager(BaseUserManager):
     '''manages User account creation'''
 
     def create_user(self, email, password, fullname='unknown user', **kwargs):
-        '''Create a new user - staff or applicant'''
+        '''Create a new user - client or applicant'''
         user = self.model(email=email, password=password,
                           fullname=fullname, **kwargs)
         user.set_password(password)
