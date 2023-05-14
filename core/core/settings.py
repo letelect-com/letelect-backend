@@ -23,6 +23,7 @@ INSTALLED_APPS = [
 
     # Third-party apps
     "rest_framework",
+    'corsheaders',
     "knox",
 
     # Local apps
@@ -32,6 +33,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -126,3 +128,16 @@ REST_FRAMEWORK = {
         'knox.auth.TokenAuthentication',
     ]
 }
+
+# CORS Configuration
+CORS_ALLOW_ALL_ORIGINS = True
+
+
+# app password - email
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'enquiries.letelect@gmail.com'
+EMAIL_HOST_PASSWORD = 'cpupnkasxtbwqcjg'
+EMAIL_USE_TLS = True
+
+# cpupnkasxtbwqcjg
