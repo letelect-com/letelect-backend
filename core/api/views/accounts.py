@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework import generics, permissions
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from api.serializers import ContactSerializer, RegisterClientSerializer, RegisterStaffSerializer, UserSerializer
+from management.models import Contact
 
 
 class TestAPI(APIView):
@@ -101,4 +102,16 @@ class ContactUsAPI(APIView):
         contact = serializer.save()
         return Response({
             "message": "Message Sent Successfully!",
+        }, status=status.HTTP_200_OK)
+
+
+class ContactUsListAPI(APIView):
+    '''This CBV is used to get all messages sent to the admin'''
+    permission_classes = [permissions.IsAdminUser]
+
+    def get(self, request, *args, **kwargs):
+        contacts = Contact.objects.all().order_by('-created_at')
+        serializer = ContactSerializer(contacts, many=True)
+        return Response({
+            "contacts": serializer.data,
         }, status=status.HTTP_200_OK)
