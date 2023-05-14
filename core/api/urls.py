@@ -23,4 +23,6 @@ urlpatterns += [
 # contacts urls
 urlpatterns += [
     path('contact-us', views.ContactUsAPI.as_view(), name='contact_us'),
+    path('contacts/', views.ContactUsListAPI.as_view(), name='contacts'),
+
 ]
