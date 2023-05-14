@@ -15,6 +15,12 @@ urlpatterns += [
     path('login/', views.LoginAPI.as_view(), name='login'),
     path('signup-client/', views.SignUpClientAPI.as_view(), name='signup-client'),
     path('register-staff/', views.RegisterStaffAPI.as_view(), name='register-staff'),
+    path('user-profile/', views.UserProfileAPI.as_view(), name='user_profile'),
     path('change-password/', views.ChangePasswordAPI.as_view(), name='change-password'),  # noqa
     path('logout/', knox_views.LogoutView.as_view(), name='logout'),
+]
+
+# contacts urls
+urlpatterns += [
+    path('contact-us', views.ContactUsAPI.as_view(), name='contact_us'),
 ]
