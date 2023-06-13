@@ -124,9 +124,15 @@ class ContactUsAPI(APIView):
 
     def post(self, request, *args, **kwargs):
         '''used to send a message to the admin via the contact form'''
-        serializer = ContactSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        contact = serializer.save()
+        # serializer = ContactSerializer(data=request.data)
+        # serializer.is_valid(raise_exception=True)
+        # contact = serializer.save()
+        contact = Contact.objects.create(
+            name=request.data.get('name'),
+            phone=request.data.get('phone'),
+            email=request.data.get('email'),
+            message=request.data.get('message'),
+        )
         return Response({
             "message": "Message Sent Successfully!",
         }, status=status.HTTP_200_OK)

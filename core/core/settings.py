@@ -139,5 +139,3 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'enquiries.letelect@gmail.com'
 EMAIL_HOST_PASSWORD = 'cpupnkasxtbwqcjg'
 EMAIL_USE_TLS = True
-
-# cpupnkasxtbwqcjg
