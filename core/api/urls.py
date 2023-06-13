@@ -27,6 +27,9 @@ urlpatterns += [
 
 
 # elections urls
+urlpatterns += [
+    path('elections/', views.ElectionsListAPI.as_view(), name='elections'),
+]
 
 # contacts urls
 urlpatterns += [
