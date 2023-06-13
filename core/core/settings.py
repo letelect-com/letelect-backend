@@ -129,6 +129,12 @@ REST_FRAMEWORK = {
     ]
 }
 
+# knox - make token non-expiry
+REST_KNOX = {
+    'TOKEN_TTL': None,
+}
+
+
 # CORS Configuration
 CORS_ALLOW_ALL_ORIGINS = True
 

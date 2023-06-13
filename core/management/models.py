@@ -78,8 +78,8 @@ class Election(models.Model):
     election_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)  # noqa
     name = models.CharField(max_length=500)
     description = models.TextField()
-    voters = models.ManyToManyField('User', related_name='voters')
-    candidates = models.ManyToManyField('Candidate', related_name='candidates')  # noqa
+    voters = models.ManyToManyField('User', related_name='voters', blank=True)  # noqa
+    candidates = models.ManyToManyField('Candidate', related_name='candidates', blank=True)  # noqa
     type_of_election = models.CharField(max_length=55)
     admin = models.ForeignKey('User', on_delete=models.CASCADE, related_name='elections')  # noqa
     created_at = models.DateTimeField(auto_now_add=True)

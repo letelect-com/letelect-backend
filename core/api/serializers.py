@@ -89,6 +89,7 @@ class ElectionSerializer(serializers.ModelSerializer):
     '''Serializer for Election model'''
     voters = UserSerializer(many=True)
     candidates = CandidateSerializer(many=True)
+    admin = UserSerializer()
 
     class Meta:
         model = Election
