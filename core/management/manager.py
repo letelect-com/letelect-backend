@@ -1,8 +1,12 @@
 from django.contrib.auth.models import BaseUserManager
+import time
 
 
 class AccountManager(BaseUserManager):
     '''manages User account creation'''
+    def generate_default_email():
+        '''generate default email for each user'''
+        return str(time.time()).split(".")[1] + "@gmail.com"
 
     def create_user(self, email, password, fullname='unknown user', **kwargs):
         '''Create a new user - client or applicant'''
