@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework import generics, permissions
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from api.serializers import ContactSerializer, RegisterClientSerializer, RegisterStaffSerializer, UserSerializer
-from management.models import Contact
+from management.models import Contact, User
 
 
 class TestAPI(APIView):
@@ -78,6 +78,33 @@ class ChangePasswordAPI(APIView):
             return Response({
                 "message": "Invalid Password Length!",
             }, status=status.HTTP_400_BAD_REQUEST)
+
+
+class VotersListAPI(APIView):
+    '''This CBV is used to get all voters'''
+    permission_classes = [permissions.IsAdminUser]
+
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        election_id = request.data.get('election_id')
+        if user.is_superuser:
+            voters = User.objects.filter(is_voter=False).order_by('-created_at')  # noqa
+        else:
+            voters = User.objects.filter(is_voter=False, election_id=election_id).order_by('-created_at')  # noqa
+        serializer = UserSerializer(voters, many=True)
+        return Response({
+            "voters": serializer.data,
+        }, status=status.HTTP_200_OK)
+
+
+class CreateUpdateVoterAPI(APIView):
+    '''CBV to create and update voters - voters are user objects'''
+    permission_classes = [permissions.IsAdminUser]
+
+    def post(self, request, *args, **kwargs):
+        return Response({
+            "message": "Voter Created Successfully!",
+        }, status=status.HTTP_201_CREATED)
 
 
 class UserProfileAPI(APIView):
