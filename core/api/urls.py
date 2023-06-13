@@ -20,9 +20,17 @@ urlpatterns += [
     path('logout/', knox_views.LogoutView.as_view(), name='logout'),
 ]
 
+# voters urls
+urlpatterns += [
+    path('voters/', views.VotersListAPI.as_view(), name='voters'),
+]
+
+
+# elections urls
+
 # contacts urls
 urlpatterns += [
-    path('contact-us', views.ContactUsAPI.as_view(), name='contact_us'),
+    path('contact-us/', views.ContactUsAPI.as_view(), name='contact_us'),
     path('contacts/', views.ContactUsListAPI.as_view(), name='contacts'),
 
 ]

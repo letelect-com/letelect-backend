@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate
-from management.models import Contact, User
+from management.models import Candidate, Contact, Election, Position, User
 from rest_framework import serializers
 from rest_framework.response import Response
 
@@ -61,9 +61,35 @@ class ContactSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         contact = Contact.objects.create(
-            fullname=validated_data['fullname'],
+            fullname=validated_data['name'],
             email=validated_data['email'],
             phone=validated_data['phone'],
             message=validated_data['message'],
         )
         return contact
+
+
+class PositionSerializer(serializers.ModelSerializer):
+    '''Serializer for Position model'''
+    class Meta:
+        model = Position
+        fields = "__all__"
+
+
+class CandidateSerializer(serializers.ModelSerializer):
+    '''Serializer for Candidate model'''
+    position = PositionSerializer()
+
+    class Meta:
+        model = Candidate
+        fields = "__all__"
+
+
+class ElectionSerializer(serializers.ModelSerializer):
+    '''Serializer for Election model'''
+    voters = UserSerializer(many=True)
+    candidates = CandidateSerializer(many=True)
+
+    class Meta:
+        model = Election
+        fields = "__all__"
